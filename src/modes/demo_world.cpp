@@ -111,6 +111,9 @@ bool DemoWorld::isRaceOver()
 {
     if(m_abort) return true;
 
+    if (getTime() >= 20.0f)
+        return true;
+
     // Now it must be laps based profiling:
     return RaceManager::get()->getFinishedKarts()==getNumKarts();
 }   // isRaceOver
