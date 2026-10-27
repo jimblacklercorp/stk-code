@@ -302,6 +302,9 @@ namespace GE
                           VmaAllocationCreateInfo& alloc_create_info,
                           VkBuffer& buffer, VmaAllocation& buffer_allocation,
                           const char* debug_name = nullptr);
+        /** Returns a pointer into name past any configured
+         *  GEConfig::m_debug_name_strip_prefixes prefix. */
+        static const char* stripDebugNamePrefix(const char* name);
         template <typename T>
         void setObjectName(VkObjectType type, T handle, const char* name) const
         {
@@ -315,7 +318,7 @@ namespace GE
                 VK_STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT;
             name_info.objectType = type;
             name_info.objectHandle = h;
-            name_info.pObjectName = name;
+            name_info.pObjectName = stripDebugNamePrefix(name);
             vkSetDebugUtilsObjectNameEXT(m_vk->device, &name_info);
         }
         template <typename T>

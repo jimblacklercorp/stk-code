@@ -145,6 +145,8 @@ public:
     void              init();
     void              reinitAfterDownloadAssets();
     static void       addRootDirs(const std::string &roots);
+    /** Returns the list of all data root directories. */
+    static const std::vector<std::string>& getRootDirs() { return m_root_dirs; }
     static void       setStdoutName(const std::string &name);
     static void       setStdoutDir(const std::string &dir);
     io::IXMLReader   *createXMLReader(const std::string &filename);

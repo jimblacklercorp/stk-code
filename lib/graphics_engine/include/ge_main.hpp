@@ -9,6 +9,7 @@
 #include <cstdint>
 #include <string>
 #include <unordered_set>
+#include <vector>
 
 namespace irr
 {
@@ -54,6 +55,9 @@ GEScreenSpaceReflectionType m_screen_space_reflection_type;
 bool m_force_deferred;
 std::unordered_set<std::string> m_ondemand_load_texture_paths;
 float m_render_scale;
+/** Path prefixes (e.g. the data root directories) stripped from the start of
+ *  Vulkan debug object names to make them shorter and easier to read. */
+std::vector<std::string> m_debug_name_strip_prefixes;
 };
 
 void setVideoDriver(irr::video::IVideoDriver* driver);

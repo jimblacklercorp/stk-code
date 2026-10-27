@@ -35,6 +35,7 @@
 #include "SDL_vulkan.h"
 #include <algorithm>
 #include <atomic>
+#include <cstring>
 #include <limits>
 #include <set>
 #include <sstream>
@@ -1742,6 +1743,21 @@ void GEVulkanDriver::createFramebuffers()
         m_vk->swap_chain_framebuffers.push_back(swap_chain_framebuffer);
     }
 }   // createFramebuffers
+
+// ----------------------------------------------------------------------------
+const char* GEVulkanDriver::stripDebugNamePrefix(const char* name)
+{
+    if (!name)
+        return name;
+    for (const std::string& prefix : getGEConfig()->m_debug_name_strip_prefixes)
+    {
+        if (!prefix.empty() &&
+            strncmp(name, prefix.c_str(), prefix.size()) == 0 &&
+            name[prefix.size()] != '\0')
+            return name + prefix.size();
+    }
+    return name;
+}   // stripDebugNamePrefix
 
 
 // ----------------------------------------------------------------------------

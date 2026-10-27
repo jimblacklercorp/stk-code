@@ -545,6 +545,10 @@ begin:
                 UserConfigParams::m_dynamic_lights;
             GE::getGEConfig()->m_ibl =
                 !UserConfigParams::m_degraded_IBL;
+            // Strip data root directories from Vulkan debug names so asset
+            // paths read e.g. "gui/icons/loading.png".
+            GE::getGEConfig()->m_debug_name_strip_prefixes =
+                FileManager::getRootDirs();
 #endif
         }
         else
